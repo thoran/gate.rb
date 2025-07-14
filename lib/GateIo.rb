@@ -1,8 +1,12 @@
 # GateIo.rb
 # GateIo
 
-# 20241025, 27
-# 0.0.0
+# 20241027
+# 0.0.1
+
+# Changes:
+# 0/1
+# 1. ~ spot_currencies: + currency argument
 
 require 'Hash/to_parameter_string'
 gem 'http.rb'
@@ -21,8 +25,8 @@ class GateIo
         end
       end # class << self
 
-      def spot_currencies
-        do_request(path: '/spot/currencies')
+      def spot_currencies(currency = nil)
+        do_request(path: "/spot/currencies/#{currency}")
       end
 
       private
