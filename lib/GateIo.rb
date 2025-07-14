@@ -2,7 +2,7 @@
 # GateIo
 
 # 20241027
-# 0.0.4
+# 0.0.5
 
 # Changes:
 # 0/1
@@ -13,6 +13,8 @@
 # 3. + spot_tickers()
 # 3/4
 # 4. + spot_order_book()
+# 4/5
+# 5. + spot_trades()
 
 require 'Hash/to_parameter_string'
 gem 'http.rb'
@@ -59,6 +61,29 @@ class GateIo
             interval: interval,
             limit: limit,
             with_id: with_id
+          }
+        )
+      end
+
+      def spot_trades(
+        currency_pair:,
+        limit: nil,
+        last_id: nil,
+        reverse: nil,
+        from: nil,
+        to: nil,
+        page: nil
+      )
+        do_request(
+          path: '/spot/trades',
+          args: {
+            currency_pair: currency_pair,
+            limit: limit,
+            last_id: last_id,
+            reverse: reverse,
+            from: from,
+            to: to,
+            page: page
           }
         )
       end
