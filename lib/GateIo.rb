@@ -1,8 +1,8 @@
 # GateIo.rb
 # GateIo
 
-# 20250127
-# 0.0.8
+# 20250127, 0207
+# 0.0.9
 
 # Changes:
 # 0/1
@@ -21,6 +21,8 @@
 # 7. + spot_my_trades()
 # 7/8
 # 8. + spot_time()
+# 8/9
+# 9. + spot_orders()
 
 # Notes:
 # 1. API methods appear in the order in which they appear in the documentation.
@@ -157,6 +159,34 @@ class GateIo
         )
       end
 
+      def spot_orders(
+        text: nil,
+        currency_pair:,
+        type: nil,
+        account: nil,
+        side:,
+        amount:,
+        price: nil,
+        time_in_force: nil,
+        iceberg: nil
+      )
+        do_request(
+          verb: 'POST',
+          path: '/spot/orders',
+          args: {
+            text: text,
+            currency_pair: currency_pair,
+            type: type,
+            account: account,
+            side: side,
+            amount: amount,
+            price: price,
+            time_in_force: time_in_force,
+            iceberg: iceberg
+          }
+        )
+      end
+
       private
 
       def initialize(api_key:, api_secret:)
@@ -168,16 +198,27 @@ class GateIo
         self.class.path_prefix + path
       end
 
-      def encoded_payload
-        Digest::SHA512.hexdigest('')
+      def encoded_payload(args)
+        args.reject!{|k,v| v.nil?}
+        OpenSSL::Digest::SHA512.hexdigest(JSON.dump(args))
       end
 
       def timestamp
         @timestamp ||= Time.now.to_i.to_s
       end
 
-      def message(path:, args:)
-        ['GET', full_path(path), args.to_parameter_string, encoded_payload, timestamp].join("\n")
+      def message(verb:, path:, args:)
+        query_string = (
+          case verb
+          when 'GET'
+            args.to_parameter_string
+          when 'POST'
+            nil
+          else
+            raise "The verb, #{verb}, is not acceptable."
+          end
+        )
+        [verb, full_path(path), query_string, encoded_payload(args), timestamp].join("\n")
       end
 
       def signature(message)
@@ -191,17 +232,24 @@ class GateIo
       def headers(signature)
         {
           'Accept' => 'application/json',
-          'Content-type' => 'application/json',
+          'Content-Type' => 'application/json',
           'KEY' => @api_key,
           'SIGN' => signature,
           'Timestamp' => timestamp,
         }
       end
 
-      def do_request(path:, args: {})
-        message = message(path: path, args: args)
+      def do_request(verb:, path:, args: {})
+        message = message(verb: verb, path: path, args: args)
         signature = signature(message)
-        response = HTTP.get(request_string(path), args, headers(signature))
+        response = (
+          case verb
+          when 'GET'
+            HTTP.get(request_string(path), args, headers(signature))
+          when 'POST'
+            HTTP.post(request_string(path), args, headers(signature))
+          end
+        )
         JSON.parse(response.body)
       end
     end
