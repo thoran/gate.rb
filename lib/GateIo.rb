@@ -1,8 +1,8 @@
 # GateIo.rb
 # GateIo
 
-# 20241027
-# 0.0.7
+# 20250127
+# 0.0.8
 
 # Changes:
 # 0/1
@@ -19,6 +19,11 @@
 # 6. + spot_candlesticks()
 # 6/7
 # 7. + spot_my_trades()
+# 7/8
+# 8. + spot_time()
+
+# Notes:
+# 1. API methods appear in the order in which they appear in the documentation.
 
 require 'Hash/to_parameter_string'
 gem 'http.rb'
@@ -38,15 +43,22 @@ class GateIo
       end # class << self
 
       def spot_currencies(currency = nil)
-        do_request(path: "/spot/currencies/#{currency}")
+        do_request(
+          verb: 'GET',
+          path: "/spot/currencies/#{currency}"
+        )
       end
 
       def spot_currency_pairs(currency_pair = nil)
-        do_request(path: "/spot/currency_pairs/#{currency_pair}")
+        do_request(
+          verb: 'GET',
+          path: "/spot/currency_pairs/#{currency_pair}"
+        )
       end
 
       def spot_tickers(currency_pair: nil, timezone: nil)
         do_request(
+          verb: 'GET',
           path: '/spot/tickers',
           args: {currency_pair: currency_pair, timezone: timezone}
         )
@@ -59,6 +71,7 @@ class GateIo
         with_id: nil
       )
         do_request(
+          verb: 'GET',
           path: '/spot/order_book',
           args: {
             currency_pair: currency_pair,
@@ -79,6 +92,7 @@ class GateIo
         page: nil
       )
         do_request(
+          verb: 'GET',
           path: '/spot/trades',
           args: {
             currency_pair: currency_pair,
@@ -100,6 +114,7 @@ class GateIo
         interval: nil
       )
         do_request(
+          verb: 'GET',
           path: '/spot/candlesticks',
           args: {
             currency_pair: currency_pair,
@@ -121,6 +136,7 @@ class GateIo
         to: nil
       )
         do_request(
+          verb: 'GET',
           path: '/spot/my_trades',
           args: {
             currency_pair: currency_pair,
@@ -131,6 +147,13 @@ class GateIo
             from: from,
             to: to
           }
+        )
+      end
+
+      def spot_time
+        do_request(
+          verb: 'GET',
+          path: '/spot/time'
         )
       end
 
