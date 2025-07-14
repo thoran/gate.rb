@@ -2,13 +2,15 @@
 # GateIo
 
 # 20241027
-# 0.0.2
+# 0.0.3
 
 # Changes:
 # 0/1
 # 1. ~ spot_currencies: + currency argument
 # 1/2
 # 2. + spot_currency_pairs()
+# 2/3
+# 3. + spot_tickers()
 
 require 'Hash/to_parameter_string'
 gem 'http.rb'
@@ -33,6 +35,13 @@ class GateIo
 
       def spot_currency_pairs(currency_pair = nil)
         do_request(path: "/spot/currency_pairs/#{currency_pair}")
+      end
+
+      def spot_tickers(currency_pair: nil, timezone: nil)
+        do_request(
+          path: '/spot/tickers',
+          args: {currency_pair: currency_pair, timezone: timezone}
+        )
       end
 
       private
