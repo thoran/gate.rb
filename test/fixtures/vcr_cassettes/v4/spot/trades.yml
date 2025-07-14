@@ -1,0 +1,65 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.gateio.ws/api/v4/spot/trades?currency_pair=BTC_USDT&limit=10
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - application/json
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - application/json
+      Key:
+      - test_api_key
+      Sign:
+      - 0f8e90c7a26188760f83f4d76b4ef43b8f95a5f637194c6c15cfea9a65e27bc246a7e6202d62a44864db0e8785e88cdc2430c99db9712c32c23619bf2cad08d0
+      Timestamp:
+      - '1752465616'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 14 Jul 2025 04:00:19 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Server:
+      - openresty
+      X-Request-Id:
+      - ''
+      X-Gate-Ratelimit-Requests-Remain:
+      - '199'
+      X-Gate-Ratelimit-Limit:
+      - '200'
+      X-Gate-Ratelimit-Reset-Timestamp:
+      - '1752465619'
+      X-Out-Time:
+      - '1752465619406448'
+      X-Gate-Trace-Id:
+      - 687480d345af6796439c9fb2c10b5247
+      X-In-Time:
+      - '1752465619404823'
+      Access-Control-Allow-Methods:
+      - GET,POST,OPTIONS,DELETE,PUT
+      Access-Control-Allow-Headers:
+      - DNT,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type
+      Access-Control-Max-Age:
+      - '1728000'
+      Vary:
+      - Origin
+    body:
+      encoding: ASCII-8BIT
+      string: '[{"id":"106784575","create_time":"1752465614","create_time_ms":"1752465614835.379000","currency_pair":"BTC_USDT","side":"sell","amount":"0.0005","price":"120837.2","sequence_id":"106784575"},{"id":"106784574","create_time":"1752465614","create_time_ms":"1752465614143.101000","currency_pair":"BTC_USDT","side":"sell","amount":"0.00799","price":"120843.5","sequence_id":"106784574"},{"id":"106784573","create_time":"1752465614","create_time_ms":"1752465614143.096000","currency_pair":"BTC_USDT","side":"sell","amount":"0.00053","price":"120845.5","sequence_id":"106784573"},{"id":"106784572","create_time":"1752465614","create_time_ms":"1752465614143.090000","currency_pair":"BTC_USDT","side":"sell","amount":"0.00082","price":"120845.9","sequence_id":"106784572"},{"id":"106784571","create_time":"1752465614","create_time_ms":"1752465614143.085000","currency_pair":"BTC_USDT","side":"sell","amount":"0.00019","price":"120846.7","sequence_id":"106784571"},{"id":"106784570","create_time":"1752465614","create_time_ms":"1752465614143.070000","currency_pair":"BTC_USDT","side":"sell","amount":"0.00013","price":"120846.7","sequence_id":"106784570"},{"id":"106784569","create_time":"1752465614","create_time_ms":"1752465614143.065000","currency_pair":"BTC_USDT","side":"sell","amount":"0.00004","price":"120847","sequence_id":"106784569"},{"id":"106784568","create_time":"1752465614","create_time_ms":"1752465614136.624000","currency_pair":"BTC_USDT","side":"sell","amount":"0.00062","price":"120849.1","sequence_id":"106784568"},{"id":"106784567","create_time":"1752465614","create_time_ms":"1752465614136.618000","currency_pair":"BTC_USDT","side":"sell","amount":"0.04963","price":"120849.1","sequence_id":"106784567"},{"id":"106784566","create_time":"1752465614","create_time_ms":"1752465614136.595000","currency_pair":"BTC_USDT","side":"sell","amount":"0.04963","price":"120849.1","sequence_id":"106784566"}]'
+  recorded_at: Mon, 14 Jul 2025 04:00:19 GMT
+recorded_with: VCR 6.3.1

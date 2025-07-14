@@ -1,68 +1,24 @@
-# GateIo.rb
-# GateIo
+# Gate/V4/Client.rb
+# Gate::V4::Client
 
-# 20250424, 25
-# 0.0.11
-
-# Changes:
-# 0/1
-# 1. ~ spot_currencies: + currency argument
-# 1/2
-# 2. + spot_currency_pairs()
-# 2/3
-# 3. + spot_tickers()
-# 3/4
-# 4. + spot_order_book()
-# 4/5
-# 5. + spot_trades()
-# 5/6
-# 6. + spot_candlesticks()
-# 6/7
-# 7. + spot_my_trades()
-# 7/8
-# 8. + spot_time()
-# 8/9
-# 9. + spot_orders()
-# 9/10 (Code hygeine only.)
-# 10. ~ do_request(): Use send instead of a case expresssion.
-# 11. + get(): A convenience method for do_request().
-# 12. + postt(): A convenience method for do_request().
-# 13. ~ spot_currencies(): Use get().
-# 14. ~ spot_currency_pairs(): Use get().
-# 15. ~ spot_tickers(): Use get().
-# 16. ~ spot_order_book(): Use get().
-# 17. ~ spot_trades(): Use get().
-# 18. ~ spot_candlesticks(): Use get().
-# 19. ~ spot_my_trades(): Use get().
-# 20. ~ spot_time(): Use get().
-# 21. ~ spot_orders(): Use post().
-# 22. /class GateIo/module GateIo/ (Not sure why it was a class.)
-# 23. + GateIo::Client
-# 10/11 (Fix message signing for subsequent requests and fix spot_orders method.)
-# 24. ~ spot_orders(): Reject nil values in the arguments hash and ensure that they are strings.
-# 25. ~ do_request(): Reset the timestamp because it is memoised from being used in multiple places.
+# 20250714
+# 0.1.0
 
 # Notes:
 # 1. API methods appear in the order in which they appear in the documentation.
 
-require 'Hash/to_parameter_string'
-gem 'http.rb'
-require 'http.rb'
+gem 'http.rb'; require 'http.rb'
 require 'json'
 require 'openssl'
 
-class Hash
-  def stringify_values
-    self.inject({}) do |a,e|
-      a[e.first] = e.last.to_s
-      a
-    end
-  end
-end
+require 'Gate/Error'
+require 'Hash/stringify_values'
+require 'Hash/x_www_form_urlencode'
 
-module GateIo
+module Gate
   module V4
     class Client
+
       API_HOST = 'api.gateio.ws'
 
       class << self
@@ -71,23 +27,28 @@ module GateIo
         end
       end # class << self
 
+      # Public endpoints
+
       def spot_currencies(currency = nil)
-        get(
+        response = get(
           path: "/spot/currencies/#{currency}"
         )
+        handle_response(response)
       end
 
       def spot_currency_pairs(currency_pair = nil)
-        get(
+        response = get(
           path: "/spot/currency_pairs/#{currency_pair}"
         )
+        handle_response(response)
       end
 
       def spot_tickers(currency_pair: nil, timezone: nil)
-        get(
+        response = get(
           path: '/spot/tickers',
           args: {currency_pair: currency_pair, timezone: timezone}
         )
+        handle_response(response)
       end
 
       def spot_order_book(
@@ -96,7 +57,7 @@ module GateIo
         limit: nil,
         with_id: nil
       )
-        get(
+        response = get(
           path: '/spot/order_book',
           args: {
             currency_pair: currency_pair,
@@ -105,6 +66,7 @@ module GateIo
             with_id: with_id
           }
         )
+        handle_response(response)
       end
 
       def spot_trades(
@@ -116,7 +78,7 @@ module GateIo
         to: nil,
         page: nil
       )
-        get(
+        response = get(
           path: '/spot/trades',
           args: {
             currency_pair: currency_pair,
@@ -128,6 +90,7 @@ module GateIo
             page: page
           }
         )
+        handle_response(response)
       end
 
       def spot_candlesticks(
@@ -137,7 +100,7 @@ module GateIo
         to: nil,
         interval: nil
       )
-        get(
+        response = get(
           path: '/spot/candlesticks',
           args: {
             currency_pair: currency_pair,
@@ -147,35 +110,14 @@ module GateIo
             interval: interval
           }
         )
-      end
-
-      def spot_my_trades(
-        currency_pair: nil,
-        limit: nil,
-        page: nil,
-        order_id: nil,
-        account: nil,
-        from: nil,
-        to: nil
-      )
-        get(
-          path: '/spot/my_trades',
-          args: {
-            currency_pair: currency_pair,
-            limit: limit,
-            page: page,
-            order_id: order_id,
-            account: account,
-            from: from,
-            to: to
-          }
-        )
+        handle_response(response)
       end
 
       def spot_time
-        get(
+        response = get(
           path: '/spot/time'
         )
+        handle_response(response)
       end
 
       def spot_orders(
@@ -200,10 +142,11 @@ module GateIo
           time_in_force: time_in_force,
           iceberg: iceberg
         }.reject{|k,v| v.nil?}.stringify_values
-        post(
+        response = post(
           path: '/spot/orders',
           args: args
         )
+        handle_response(response)
       end
 
       private
@@ -230,7 +173,7 @@ module GateIo
         query_string = (
           case verb
           when 'GET'
-            args.to_parameter_string
+            args.x_www_form_urlencode
           when 'POST'
             nil
           else
@@ -263,7 +206,7 @@ module GateIo
         signature = signature(message)
         response = HTTP.send(verb.to_s.downcase, request_string(path), args, headers(signature))
         @timestamp = nil
-        JSON.parse(response.body)
+        response
       end
 
       def get(path:, args: {})
@@ -273,8 +216,39 @@ module GateIo
       def post(path:, args: {})
         do_request(verb: 'POST', path: path, args: args)
       end
+
+      def handle_response(response)
+        if response.success?
+          JSON.parse(response.body)
+        else
+          case response.code.to_i
+          when 400
+            raise Gate::InvalidRequestError.new(
+              code: response.code,
+              message: response.message,
+              body: response.body
+            )
+          when 401
+            raise Gate::AuthenticationError.new(
+              code: response.code,
+              message: response.message,
+              body: response.body
+            )
+          when 429
+            raise Gate::RateLimitError.new(
+              code: response.code,
+              message: response.message,
+              body: response.body
+            )
+          else
+            raise Gate::APIError.new(
+              code: response.code,
+              message: response.message,
+              body: response.body
+            )
+          end
+        end
+      end
     end
   end
-
-  class Client < GateIo::V4::Client; end
 end

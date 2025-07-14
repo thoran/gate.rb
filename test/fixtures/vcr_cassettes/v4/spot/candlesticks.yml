@@ -1,0 +1,65 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.gateio.ws/api/v4/spot/candlesticks?currency_pair=BTC_USDT&interval=1h&limit=10
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - application/json
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - application/json
+      Key:
+      - test_api_key
+      Sign:
+      - c3fb7f30366a1b9743260424d58f6802d783750a53bb2e026885714ef026e19ce7e0cbf3e24fceb154167614caef4b4abf4381c58360d379fa5d88755dcaab0d
+      Timestamp:
+      - '1752472065'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 14 Jul 2025 05:47:47 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Server:
+      - openresty
+      X-Request-Id:
+      - ''
+      X-Gate-Ratelimit-Requests-Remain:
+      - '199'
+      X-Gate-Ratelimit-Limit:
+      - '200'
+      X-Gate-Ratelimit-Reset-Timestamp:
+      - '1752472067'
+      X-Out-Time:
+      - '1752472067522889'
+      X-Gate-Trace-Id:
+      - 68749a03d2a961c0d986d7d8e7e971b6
+      X-In-Time:
+      - '1752472067519095'
+      Access-Control-Allow-Methods:
+      - GET,POST,OPTIONS,DELETE,PUT
+      Access-Control-Allow-Headers:
+      - DNT,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type
+      Access-Control-Max-Age:
+      - '1728000'
+      Vary:
+      - Origin
+    body:
+      encoding: ASCII-8BIT
+      string: '[["1752436800","9771455.50152500","119083.8","119374.8","118833.3","118974.3","82.06944000","true"],["1752440400","18206606.23810500","118630.3","119083.8","118497","119083.8","153.23602000","true"],["1752444000","16952163.14858100","118524.5","118791.4","118242.6","118644.4","143.04183000","true"],["1752447600","10722583.18179800","119074.5","119194.6","118377.8","118524.2","90.26397000","true"],["1752451200","11223108.03419224","119068.6","119466","118934.1","119074.5","94.17700994","true"],["1752454800","7141422.98997800","119103.5","119234.7","118910.7","119068.6","59.98833000","true"],["1752458400","25155085.07103800","119651.3","120017.6","118982.5","119103.5","210.20802900","true"],["1752462000","37264105.76639800","120757.9","121500","119600.1","119651.3","308.80664000","true"],["1752465600","29483127.08037400","121400.8","121425.8","120567.2","120757.9","243.75298000","true"],["1752469200","43638965.22665400","122210.5","122647","121148.2","121400.9","357.41792000","false"]]'
+  recorded_at: Mon, 14 Jul 2025 05:47:47 GMT
+recorded_with: VCR 6.3.1

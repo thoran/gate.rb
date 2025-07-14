@@ -1,0 +1,65 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.gateio.ws/api/v4/spot/orders
+    body:
+      encoding: UTF-8
+      string: '{"currency_pair":"BTC_USDT","side":"buy","amount":"0.0001","price":"100000","time_in_force":"gtc"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - application/json
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - application/json
+      Key:
+      - "<API_KEY>"
+      Sign:
+      - 0a96d5509f892bc401039413f12ec964dfd886996044b7694a99f7dcdd1034316f3fec9b769d86fd25ccb2480ba56c213fa7e44250d5f4effac43e8eba7fd26d
+      Timestamp:
+      - '1752480707'
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Date:
+      - Mon, 14 Jul 2025 08:11:49 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '585'
+      Connection:
+      - keep-alive
+      Server:
+      - openresty
+      X-Request-Id:
+      - ''
+      X-Gate-Ratelimit-Requests-Remain:
+      - '29'
+      X-Gate-Ratelimit-Limit:
+      - '30'
+      X-Gate-Ratelimit-Reset-Timestamp:
+      - '1752480709'
+      X-Out-Time:
+      - '1752480709578570'
+      X-Gate-Trace-Id:
+      - 6874bbc5c366480c694852d5286a4bf0
+      X-In-Time:
+      - '1752480709568888'
+      Access-Control-Allow-Methods:
+      - GET,POST,OPTIONS,DELETE,PUT
+      Access-Control-Allow-Headers:
+      - DNT,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type
+      Access-Control-Max-Age:
+      - '1728000'
+      Vary:
+      - Origin
+    body:
+      encoding: UTF-8
+      string: '{"id":"874837553157","text":"apiv4","amend_text":"-","create_time":"1752480709","update_time":"1752480709","create_time_ms":1752480709577,"update_time_ms":1752480709577,"status":"open","currency_pair":"BTC_USDT","type":"limit","account":"spot","side":"buy","amount":"0.0001","price":"100000","time_in_force":"gtc","iceberg":"0","left":"0.0001","filled_amount":"0","fill_price":"0","filled_total":"0","fee":"0","fee_currency":"BTC","point_fee":"0","gt_fee":"0","gt_maker_fee":"0","gt_taker_fee":"0","gt_discount":false,"rebated_fee":"0","rebated_fee_currency":"USDT","finish_as":"open"}'
+  recorded_at: Mon, 14 Jul 2025 08:11:49 GMT
+recorded_with: VCR 6.3.1

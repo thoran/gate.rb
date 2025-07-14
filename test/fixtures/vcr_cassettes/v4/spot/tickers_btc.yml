@@ -1,0 +1,65 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.gateio.ws/api/v4/spot/tickers?currency_pair=BTC_USDT
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - application/json
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - application/json
+      Key:
+      - test_api_key
+      Sign:
+      - 6781a076e8184ec6151d35cc473d0e7a138647f10631190d0bdafd9a72a8b85d2352661b967c7e1c39ff4ac2195b1008a70f343cec525e50b565100d1582aa67
+      Timestamp:
+      - '1752456623'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 14 Jul 2025 01:30:26 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Server:
+      - openresty
+      X-Request-Id:
+      - ''
+      X-Gate-Ratelimit-Requests-Remain:
+      - '199'
+      X-Gate-Ratelimit-Limit:
+      - '200'
+      X-Gate-Ratelimit-Reset-Timestamp:
+      - '1752456626'
+      X-Out-Time:
+      - '1752456626095087'
+      X-Gate-Trace-Id:
+      - 68745db2803c7f458e2526a85943fcae
+      X-In-Time:
+      - '1752456626070339'
+      Access-Control-Allow-Methods:
+      - GET,POST,OPTIONS,DELETE,PUT
+      Access-Control-Allow-Headers:
+      - DNT,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type
+      Access-Control-Max-Age:
+      - '1728000'
+      Vary:
+      - Origin
+    body:
+      encoding: ASCII-8BIT
+      string: '[{"currency_pair":"BTC_USDT","last":"118934.9","lowest_ask":"118929.6","lowest_size":"14.74876","highest_bid":"118929.5","highest_size":"10.15654","change_percentage":"1.31","base_volume":"4188.9960398802","quote_volume":"497168417.68478","high_24h":"119485.8","low_24h":"117380"}]'
+  recorded_at: Mon, 14 Jul 2025 01:30:25 GMT
+recorded_with: VCR 6.3.1

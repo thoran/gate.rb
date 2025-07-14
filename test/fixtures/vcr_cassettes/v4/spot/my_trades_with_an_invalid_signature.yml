@@ -1,0 +1,51 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.gateio.ws/api/v4/spot/my_trades?currency_pair=BTC_USDT&limit=10
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - application/json
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - application/json
+      Key:
+      - "<API_KEY>"
+      Sign:
+      - 5885e5ab2fab9589fee95821017c19487acb8a2fceadc0ba3cf901b938e415ebd5c0abb570643b1ddfda42a81e32636ded51e0f1dec0eb994b86c7131702c874
+      Timestamp:
+      - '1752480709'
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Date:
+      - Mon, 14 Jul 2025 08:11:51 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Server:
+      - openresty
+      X-Out-Time:
+      - '1752480711684346'
+      X-Gate-Trace-Id:
+      - 6874bbc7eb9e61655b1732ad7f874d38
+      X-In-Time:
+      - '1752480711679594'
+    body:
+      encoding: UTF-8
+      string: '{"label":"INVALID_SIGNATURE","message":"Signature mismatch"}
+
+        '
+  recorded_at: Mon, 14 Jul 2025 08:11:51 GMT
+recorded_with: VCR 6.3.1

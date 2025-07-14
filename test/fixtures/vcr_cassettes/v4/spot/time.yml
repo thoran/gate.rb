@@ -1,0 +1,65 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.gateio.ws/api/v4/spot/time
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - application/json
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - application/json
+      Key:
+      - test_api_key
+      Sign:
+      - a06ea682c736b7a177b51d2773c64305bb9f76d633e0d3fcfe5e25581ea1c76ea587a6d36e9eac7d763f453734f92fcd8f5900bc09124f3ddf3348a2808e9bbc
+      Timestamp:
+      - '1752472062'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 14 Jul 2025 05:47:45 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Server:
+      - openresty
+      X-Request-Id:
+      - ''
+      X-Gate-Ratelimit-Requests-Remain:
+      - '199'
+      X-Gate-Ratelimit-Limit:
+      - '200'
+      X-Gate-Ratelimit-Reset-Timestamp:
+      - '1752472065'
+      X-Out-Time:
+      - '1752472065300887'
+      X-Gate-Trace-Id:
+      - 68749a01f8e8215197c5ee72a1a55311
+      X-In-Time:
+      - '1752472065226306'
+      Access-Control-Allow-Methods:
+      - GET,POST,OPTIONS,DELETE,PUT
+      Access-Control-Allow-Headers:
+      - DNT,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type
+      Access-Control-Max-Age:
+      - '1728000'
+      Vary:
+      - Origin
+    body:
+      encoding: ASCII-8BIT
+      string: '{"server_time":1752472065300}'
+  recorded_at: Mon, 14 Jul 2025 05:47:45 GMT
+recorded_with: VCR 6.3.1

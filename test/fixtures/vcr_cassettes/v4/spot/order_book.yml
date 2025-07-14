@@ -1,0 +1,65 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.gateio.ws/api/v4/spot/order_book?currency_pair=BTC_USDT&limit=10
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - application/json
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - application/json
+      Key:
+      - test_api_key
+      Sign:
+      - e5c06cdee05139e7c76d7521241df795e601bfd9b6d60248a4a76cbe37a1d01b46cbc336c9a3a9c63405856aab50b3ca8dbebed5f11247c72ae5bbe91661da84
+      Timestamp:
+      - '1752465619'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 14 Jul 2025 04:00:21 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Server:
+      - openresty
+      X-Request-Id:
+      - ''
+      X-Gate-Ratelimit-Requests-Remain:
+      - '199'
+      X-Gate-Ratelimit-Limit:
+      - '200'
+      X-Gate-Ratelimit-Reset-Timestamp:
+      - '1752465621'
+      X-Out-Time:
+      - '1752465621646062'
+      X-Gate-Trace-Id:
+      - 687480d5ba2adc230f5e2fea5ae8a75c
+      X-In-Time:
+      - '1752465621644678'
+      Access-Control-Allow-Methods:
+      - GET,POST,OPTIONS,DELETE,PUT
+      Access-Control-Allow-Headers:
+      - DNT,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type
+      Access-Control-Max-Age:
+      - '1728000'
+      Vary:
+      - Origin
+    body:
+      encoding: ASCII-8BIT
+      string: '{"current":1752465620629,"update":1752465620629,"asks":[["120796.4","0.00103"],["120797","0.03475"],["120799.9","0.00428"],["120802.4","0.02482"],["120808.5","0.00644"],["120815.8","0.00123"],["120816.7","0.00827"],["120817.3","0.01025"],["120819.8","0.00489"],["120820.4","0.02974"]],"bids":[["120796.3","0.75663"],["120796.2","0.09893"],["120793.9","0.00014"],["120793.6","0.00007"],["120793","0.00103"],["120785.4","0.00562"],["120784.1","0.008"],["120782.9","0.00046"],["120772.9","0.11128"],["120772.8","0.07838"]]}'
+  recorded_at: Mon, 14 Jul 2025 04:00:21 GMT
+recorded_with: VCR 6.3.1

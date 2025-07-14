@@ -1,0 +1,10 @@
+# Gate/CHANGELOG.txt
+
+## [0.1.0] - 2025-07-14
+* /GateIo/Gate/
+* Split up single GateIo.rb file into Gate/V4/Client.rb, Gate/Client.rb, Hash/stringify_values.rb, etc.
+* /require 'Hash/to_parameter_string'/require 'Hash/x_www_form_url_encode'/
+* + ./test
+* - Gate::V4::Client#spot_my_trades() because I couldn't immediately get the test to work.
+* + Gate::V4::Client#handle_response
+* ~ Gate::V4::Client: All methods now use handle_response.

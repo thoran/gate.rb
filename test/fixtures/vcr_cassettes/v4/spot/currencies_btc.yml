@@ -1,0 +1,65 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.gateio.ws/api/v4/spot/currencies/BTC
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - application/json
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - application/json
+      Key:
+      - test_api_key
+      Sign:
+      - 75e9318c403f845b637bbd06b09392c6bd9f93e0329ad84be5e8e59a265e69af8457cc1a5b74faf04d8f0419f462d19e3a20aad2c1897f39595c46334ecd5b4d
+      Timestamp:
+      - '1752417379'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 13 Jul 2025 14:36:21 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Server:
+      - openresty
+      X-Request-Id:
+      - ''
+      X-Gate-Ratelimit-Requests-Remain:
+      - '199'
+      X-Gate-Ratelimit-Limit:
+      - '200'
+      X-Gate-Ratelimit-Reset-Timestamp:
+      - '1752417381'
+      X-Out-Time:
+      - '1752417381645909'
+      X-Gate-Trace-Id:
+      - 6873c465de5080865113cd169a0457a2
+      X-In-Time:
+      - '1752417381643439'
+      Access-Control-Allow-Methods:
+      - GET,POST,OPTIONS,DELETE,PUT
+      Access-Control-Allow-Headers:
+      - DNT,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type
+      Access-Control-Max-Age:
+      - '1728000'
+      Vary:
+      - Origin
+    body:
+      encoding: ASCII-8BIT
+      string: '{"currency":"BTC","name":"Bitcoin","delisted":false,"withdraw_disabled":false,"withdraw_delayed":false,"deposit_disabled":false,"trade_disabled":false,"fixed_rate":"","chain":"BTC","chains":[{"name":"BTC","addr":"","withdraw_disabled":false,"withdraw_delayed":false,"deposit_disabled":false},{"name":"BSC","addr":"0x7130d2a12b9bcbfae4f2634d864a1ee1ce3ead9c","withdraw_disabled":false,"withdraw_delayed":false,"deposit_disabled":false},{"name":"HT","addr":"0x66a79d23e58475d2738179ca52cd0b41d73f0bea","withdraw_disabled":true,"withdraw_delayed":false,"deposit_disabled":true}]}'
+  recorded_at: Sun, 13 Jul 2025 14:36:21 GMT
+recorded_with: VCR 6.3.1

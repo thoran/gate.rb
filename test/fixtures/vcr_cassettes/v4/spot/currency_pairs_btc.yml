@@ -1,0 +1,65 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.gateio.ws/api/v4/spot/currency_pairs/BTC_USDT
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - application/json
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - application/json
+      Key:
+      - test_api_key
+      Sign:
+      - e97337aef302dc7a04235d0fdc4b7cea25bffcbf378ffa480ea2e8c644aa32eeb55ef5c70a9bb931f05a8b628d34ddf59884595502f960b1473ffced73bd6f9d
+      Timestamp:
+      - '1752455980'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 14 Jul 2025 01:19:42 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Server:
+      - openresty
+      X-Request-Id:
+      - ''
+      X-Gate-Ratelimit-Requests-Remain:
+      - '199'
+      X-Gate-Ratelimit-Limit:
+      - '200'
+      X-Gate-Ratelimit-Reset-Timestamp:
+      - '1752455982'
+      X-Out-Time:
+      - '1752455982968580'
+      X-Gate-Trace-Id:
+      - 68745b2eca76c6687979f7d147b81bf7
+      X-In-Time:
+      - '1752455982966698'
+      Access-Control-Allow-Methods:
+      - GET,POST,OPTIONS,DELETE,PUT
+      Access-Control-Allow-Headers:
+      - DNT,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type
+      Access-Control-Max-Age:
+      - '1728000'
+      Vary:
+      - Origin
+    body:
+      encoding: ASCII-8BIT
+      string: '{"id":"BTC_USDT","base":"BTC","base_name":"Bitcoin","quote":"USDT","quote_name":"Tether","fee":"0.2","min_base_amount":"0.00001","min_quote_amount":"3","max_base_amount":"100","max_quote_amount":"5000000","amount_precision":5,"precision":1,"trade_status":"tradable","sell_start":0,"buy_start":0,"type":"normal","trade_url":"https://www.gate.com/trade/BTC_USDT","st_tag":false}'
+  recorded_at: Mon, 14 Jul 2025 01:19:42 GMT
+recorded_with: VCR 6.3.1

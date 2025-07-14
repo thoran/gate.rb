@@ -1,0 +1,51 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.gateio.ws/api/v4/spot/orders
+    body:
+      encoding: UTF-8
+      string: '{"currency_pair":"BTC_USDT","side":"buy","amount":"0.0001","price":"100000","time_in_force":"gtc"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - application/json
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - application/json
+      Key:
+      - test_api_key
+      Sign:
+      - 8be8ec44e251f363f3f798be7d9ed67cd5126086963fe38e160214f7abd59cac1d09165bdb3a7c51d97e59b535a10f0da6cb719d8e1566eb8022543a641152d9
+      Timestamp:
+      - '1752480546'
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Date:
+      - Mon, 14 Jul 2025 08:09:09 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Server:
+      - openresty
+      X-Out-Time:
+      - '1752480549053320'
+      X-Gate-Trace-Id:
+      - 6874bb25bf46163a53b546f81b664636
+      X-In-Time:
+      - '1752480549049412'
+    body:
+      encoding: UTF-8
+      string: '{"label":"INVALID_KEY","message":"Invalid key provided"}
+
+        '
+  recorded_at: Mon, 14 Jul 2025 08:09:08 GMT
+recorded_with: VCR 6.3.1
