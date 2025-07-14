@@ -1,0 +1,77 @@
+# GateIo.rb
+# GateIo
+
+# 20241025, 27
+# 0.0.0
+
+require 'Hash/to_parameter_string'
+gem 'http.rb'
+require 'http.rb'
+require 'json'
+require 'openssl'
+
+class GateIo
+  module V4
+    class Client
+      API_HOST = 'api.gateio.ws'
+
+      class << self
+        def path_prefix
+          '/api/v4'
+        end
+      end # class << self
+
+      def spot_currencies
+        do_request(path: '/spot/currencies')
+      end
+
+      private
+
+      def initialize(api_key:, api_secret:)
+        @api_key = api_key.encode('UTF-8')
+        @api_secret = api_secret.encode('UTF-8')
+      end
+
+      def full_path(path)
+        self.class.path_prefix + path
+      end
+
+      def encoded_payload
+        Digest::SHA512.hexdigest('')
+      end
+
+      def timestamp
+        @timestamp ||= Time.now.to_i.to_s
+      end
+
+      def message(path:, args:)
+        ['GET', full_path(path), args.to_parameter_string, encoded_payload, timestamp].join("\n")
+      end
+
+      def signature(message)
+        OpenSSL::HMAC.hexdigest('SHA512', @api_secret, message)
+      end
+
+      def request_string(path)
+        "https://#{API_HOST}#{self.class.path_prefix}#{path}"
+      end
+
+      def headers(signature)
+        {
+          'Accept' => 'application/json',
+          'Content-type' => 'application/json',
+          'KEY' => @api_key,
+          'SIGN' => signature,
+          'Timestamp' => timestamp,
+        }
+      end
+
+      def do_request(path:, args: {})
+        message = message(path: path, args: args)
+        signature = signature(message)
+        response = HTTP.get(request_string(path), args, headers(signature))
+        JSON.parse(response.body)
+      end
+    end
+  end
+end
