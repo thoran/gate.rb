@@ -1,8 +1,8 @@
 # GateIo.rb
 # GateIo
 
-# 20250127, 0207
-# 0.0.9
+# 20250207
+# 0.0.10
 
 # Changes:
 # 0/1
@@ -23,6 +23,21 @@
 # 8. + spot_time()
 # 8/9
 # 9. + spot_orders()
+# 9/10 (Code hygeine only.)
+# 10. ~ do_request(): Use send instead of a case expresssion.
+# 11. + get(): A convenience method for do_request().
+# 12. + postt(): A convenience method for do_request().
+# 13. ~ spot_currencies(): Use get().
+# 14. ~ spot_currency_pairs(): Use get().
+# 15. ~ spot_tickers(): Use get().
+# 16. ~ spot_order_book(): Use get().
+# 17. ~ spot_trades(): Use get().
+# 18. ~ spot_candlesticks(): Use get().
+# 19. ~ spot_my_trades(): Use get().
+# 20. ~ spot_time(): Use get().
+# 21. ~ spot_orders(): Use post().
+# 22. /class GateIo/module GateIo/ (Not sure why it was a class.)
+# 23. + GateIo::Client
 
 # Notes:
 # 1. API methods appear in the order in which they appear in the documentation.
@@ -33,7 +48,7 @@ require 'http.rb'
 require 'json'
 require 'openssl'
 
-class GateIo
+module GateIo
   module V4
     class Client
       API_HOST = 'api.gateio.ws'
@@ -45,22 +60,19 @@ class GateIo
       end # class << self
 
       def spot_currencies(currency = nil)
-        do_request(
-          verb: 'GET',
+        get(
           path: "/spot/currencies/#{currency}"
         )
       end
 
       def spot_currency_pairs(currency_pair = nil)
-        do_request(
-          verb: 'GET',
+        get(
           path: "/spot/currency_pairs/#{currency_pair}"
         )
       end
 
       def spot_tickers(currency_pair: nil, timezone: nil)
-        do_request(
-          verb: 'GET',
+        get(
           path: '/spot/tickers',
           args: {currency_pair: currency_pair, timezone: timezone}
         )
@@ -72,8 +84,7 @@ class GateIo
         limit: nil,
         with_id: nil
       )
-        do_request(
-          verb: 'GET',
+        get(
           path: '/spot/order_book',
           args: {
             currency_pair: currency_pair,
@@ -93,8 +104,7 @@ class GateIo
         to: nil,
         page: nil
       )
-        do_request(
-          verb: 'GET',
+        get(
           path: '/spot/trades',
           args: {
             currency_pair: currency_pair,
@@ -115,8 +125,7 @@ class GateIo
         to: nil,
         interval: nil
       )
-        do_request(
-          verb: 'GET',
+        get(
           path: '/spot/candlesticks',
           args: {
             currency_pair: currency_pair,
@@ -137,8 +146,7 @@ class GateIo
         from: nil,
         to: nil
       )
-        do_request(
-          verb: 'GET',
+        get(
           path: '/spot/my_trades',
           args: {
             currency_pair: currency_pair,
@@ -153,8 +161,7 @@ class GateIo
       end
 
       def spot_time
-        do_request(
-          verb: 'GET',
+        get(
           path: '/spot/time'
         )
       end
@@ -170,8 +177,7 @@ class GateIo
         time_in_force: nil,
         iceberg: nil
       )
-        do_request(
-          verb: 'POST',
+        post(
           path: '/spot/orders',
           args: {
             text: text,
@@ -242,16 +248,19 @@ class GateIo
       def do_request(verb:, path:, args: {})
         message = message(verb: verb, path: path, args: args)
         signature = signature(message)
-        response = (
-          case verb
-          when 'GET'
-            HTTP.get(request_string(path), args, headers(signature))
-          when 'POST'
-            HTTP.post(request_string(path), args, headers(signature))
-          end
-        )
+        response = HTTP.send(verb.to_s.downcase, request_string(path), args, headers(signature))
         JSON.parse(response.body)
+      end
+
+      def get(path:, args: {})
+        do_request(verb: 'GET', path: path, args: args)
+      end
+
+      def post(path:, args: {})
+        do_request(verb: 'POST', path: path, args: args)
       end
     end
   end
+
+  class Client < GateIo::V4::Client; end
 end
