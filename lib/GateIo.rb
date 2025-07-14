@@ -2,7 +2,7 @@
 # GateIo
 
 # 20241027
-# 0.0.5
+# 0.0.6
 
 # Changes:
 # 0/1
@@ -15,6 +15,8 @@
 # 4. + spot_order_book()
 # 4/5
 # 5. + spot_trades()
+# 5/6
+# 6. + spot_candlesticks()
 
 require 'Hash/to_parameter_string'
 gem 'http.rb'
@@ -84,6 +86,25 @@ class GateIo
             from: from,
             to: to,
             page: page
+          }
+        )
+      end
+
+      def spot_candlesticks(
+        currency_pair:,
+        limit: nil,
+        from: nil,
+        to: nil,
+        interval: nil
+      )
+        do_request(
+          path: '/spot/candlesticks',
+          args: {
+            currency_pair: currency_pair,
+            limit: limit,
+            from: from,
+            to: to,
+            interval: interval
           }
         )
       end
