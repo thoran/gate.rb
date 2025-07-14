@@ -1,8 +1,8 @@
 # GateIo.rb
 # GateIo
 
-# 20250207
-# 0.0.10
+# 20250424, 25
+# 0.0.11
 
 # Changes:
 # 0/1
@@ -38,6 +38,9 @@
 # 21. ~ spot_orders(): Use post().
 # 22. /class GateIo/module GateIo/ (Not sure why it was a class.)
 # 23. + GateIo::Client
+# 10/11 (Fix message signing for subsequent requests and fix spot_orders method.)
+# 24. ~ spot_orders(): Reject nil values in the arguments hash and ensure that they are strings.
+# 25. ~ do_request(): Reset the timestamp because it is memoised from being used in multiple places.
 
 # Notes:
 # 1. API methods appear in the order in which they appear in the documentation.
@@ -47,6 +50,15 @@ gem 'http.rb'
 require 'http.rb'
 require 'json'
 require 'openssl'
+
+class Hash
+  def stringify_values
+    self.inject({}) do |a,e|
+      a[e.first] = e.last.to_s
+      a
+    end
+  end
+end
 
 module GateIo
   module V4
@@ -177,19 +189,20 @@ module GateIo
         time_in_force: nil,
         iceberg: nil
       )
+        args = {
+          text: text,
+          currency_pair: currency_pair,
+          type: type,
+          account: account,
+          side: side,
+          amount: amount,
+          price: price,
+          time_in_force: time_in_force,
+          iceberg: iceberg
+        }.reject{|k,v| v.nil?}.stringify_values
         post(
           path: '/spot/orders',
-          args: {
-            text: text,
-            currency_pair: currency_pair,
-            type: type,
-            account: account,
-            side: side,
-            amount: amount,
-            price: price,
-            time_in_force: time_in_force,
-            iceberg: iceberg
-          }
+          args: args
         )
       end
 
@@ -249,6 +262,7 @@ module GateIo
         message = message(verb: verb, path: path, args: args)
         signature = signature(message)
         response = HTTP.send(verb.to_s.downcase, request_string(path), args, headers(signature))
+        @timestamp = nil
         JSON.parse(response.body)
       end
 
