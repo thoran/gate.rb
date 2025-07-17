@@ -4,7 +4,7 @@ Gem::Specification.new do |spec|
   spec.name = 'gate.rb'
 
   spec.version = Gate::VERSION
-  spec.date = '2025-07-14'
+  spec.date = '2025-07-17'
 
   spec.summary = "Access the Gate API with Ruby."
   spec.description = "Access the Gate API with Ruby."

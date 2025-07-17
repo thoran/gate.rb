@@ -1,9 +1,26 @@
 # Gate/CHANGELOG.txt
 
+# Gate/CHANGELOG.txt
+
+## [0.2.0] - 2025-07-17
+* + Gate::Configuration
+* ~ Gate::V4::Client#initialize: Use optional configuration instance and class methods.
+* ~ Gate::V4::Client#encoded_payload: Encode empty string for authenticated GET requests.
+* ~ Gate::V4::Client#message: Moved query_string to own method...
+* + Gate::V4::Client#query_string
+* + Gate::V4::Client#spot_my_trades: Reintroduced once encoded_payload() was fixed.
+* + Gate::V4::Client#wallet_total_balance
+* ~ Gate::V4::Client#handle_response: + 403 (insufficient permission)
+* + Gate::InsufficientPermissionError
+* ~ test/Gate/V4/Client/test_private_endpoints: + #spot_my_trades, #wallet_total_balance
+* + test/Gate/Configuration_test
+* ~ Gate::VERSION: 0.1.0 --> 0.2.0
+* ~ gate.rb.gemspec
+
 ## [0.1.0] - 2025-07-14
 * /GateIo/Gate/
 * Split up single GateIo.rb file into Gate/V4/Client.rb, Gate/Client.rb, Hash/stringify_values.rb, etc.
-* /require 'Hash/to_parameter_string'/require 'Hash/x_www_form_url_encode'/
+* /require 'Hash\/to_parameter_string'/require 'Hash\/x_www_form_url_encode'/
 * + ./test
 * - Gate::V4::Client#spot_my_trades() because I couldn't immediately get the test to work.
 * + Gate::V4::Client#handle_response

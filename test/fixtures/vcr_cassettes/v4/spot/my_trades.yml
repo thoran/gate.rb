@@ -1,0 +1,65 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.gateio.ws/api/v4/spot/my_trades?currency_pair=BTC5S_USDT
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - application/json
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - application/json
+      Key:
+      - "<API_KEY>"
+      Sign:
+      - 58d76262b170b78d42c0af9b0aec2293b6122b853f6d699ca5fc714d5bf8747eb7a8062440abbb59d79487e6ed7cb285d8ea7fbba3cdfbdd942854b2379a61cc
+      Timestamp:
+      - '1752753292'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 17 Jul 2025 11:54:54 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Server:
+      - openresty
+      X-Request-Id:
+      - ''
+      X-Gate-Ratelimit-Requests-Remain:
+      - '199'
+      X-Gate-Ratelimit-Limit:
+      - '200'
+      X-Gate-Ratelimit-Reset-Timestamp:
+      - '1752753294'
+      X-Out-Time:
+      - '1752753294206359'
+      X-Gate-Trace-Id:
+      - 6878e48ee862dbf934a3776f62860f5d
+      X-In-Time:
+      - '1752753294169250'
+      Access-Control-Allow-Methods:
+      - GET,POST,OPTIONS,DELETE,PUT
+      Access-Control-Allow-Headers:
+      - DNT,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type
+      Access-Control-Max-Age:
+      - '1728000'
+      Vary:
+      - Origin
+    body:
+      encoding: ASCII-8BIT
+      string: '[{"id":"8499409","create_time":"1752752885","create_time_ms":"1752752885185.272000","currency_pair":"BTC_USDT","side":"buy","role":"taker","amount":"0.002034","price":"100_000","order_id":"877106720946","fee":"0.000018306","fee_currency":"BTC","point_fee":"0","gt_fee":"0","amend_text":"-","sequence_id":"8499409","text":"apiv4"},{"id":"8499349","create_time":"1752752526","create_time_ms":"1752752526318.286000","currency_pair":"BTC_USDT","side":"buy","role":"maker","amount":"0.002040","price":"101_000","order_id":"877103825590","fee":"0.00001734","fee_currency":"BTC","point_fee":"0","gt_fee":"0","amend_text":"-","sequence_id":"8499349","text":"apiv4"},{"id":"8498707","create_time":"1752749285","create_time_ms":"1752749285492.237000","currency_pair":"BTC_USDT","side":"buy","role":"maker","amount":"0.002054","price":"102_000","order_id":"877075676111","fee":"0.000017459","fee_currency":"BTC","point_fee":"0","gt_fee":"0","amend_text":"-","sequence_id":"8498707","text":"apiv4"}]'
+  recorded_at: Thu, 17 Jul 2025 11:54:54 GMT
+recorded_with: VCR 6.3.1

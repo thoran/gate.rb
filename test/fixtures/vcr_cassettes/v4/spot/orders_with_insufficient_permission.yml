@@ -1,0 +1,51 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.gateio.ws/api/v4/spot/orders
+    body:
+      encoding: UTF-8
+      string: '{"currency_pair":"BTC_USDT","side":"buy","amount":"0.0001","price":"100000","time_in_force":"gtc"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - application/json
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - application/json
+      Key:
+      - "<API_KEY>"
+      Sign:
+      - 6dd581742b80c9f8a29ed7b09ce005ba9dfb8b269eea0829b99b113a0e9832ed
+      Timestamp:
+      - '1752747100'
+  response:
+    status:
+      code: 403
+      message: Forbidden
+    headers:
+      Date:
+      - Thu, 17 Jul 2025 10:11:42 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Server:
+      - openresty
+      X-Out-Time:
+      - '1752747102678647'
+      X-Gate-Trace-Id:
+      - 6878cc5e6c663ddb53f2f3f65798a1d0
+      X-In-Time:
+      - '1752747102674477'
+    body:
+      encoding: ASCII-8BIT
+      string: '{"message":"Request API key does not have spot write permission","label":"FORBIDDEN"}
+
+        '
+  recorded_at: Thu, 17 Jul 2025 10:11:42 GMT
+recorded_with: VCR 6.3.1

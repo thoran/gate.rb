@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://api.gateio.ws/api/v4/spot/my_trades?currency_pair=BTC_USDT
+    uri: https://api.gateio.ws/api/v4/wallet/total_balance?currency=BTC_USDT
     body:
       encoding: US-ASCII
       string: ''
@@ -18,16 +18,16 @@ http_interactions:
       Key:
       - "<API_KEY>"
       Sign:
-      - 1ae13e9b18276f4c9b18c55b564f65bb8f7f5022c6b6396cf5bbbef884586404bdf826b11ee769666caf0c0c0ac714239be152fa0e8a8ff3b41c0c849fae9fbb
+      - 640d5f2f717bd989462bbf19bafdbfd9f5c14ef8769f4cd634926e78d02fc86947c32141d8853d5bf80a553bb8114fe3f21111c3dcae16ace3da5c5b1644a866
       Timestamp:
-      - '1752744013'
+      - '1752745896'
   response:
     status:
-      code: 401
-      message: Unauthorized
+      code: 403
+      message: Forbidden
     headers:
       Date:
-      - Thu, 17 Jul 2025 09:20:15 GMT
+      - Thu, 17 Jul 2025 09:51:38 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
@@ -37,13 +37,13 @@ http_interactions:
       Server:
       - openresty
       X-Out-Time:
-      - '1752744015342811'
+      - '1752745898498035'
       X-Gate-Trace-Id:
-      - 6878c04fe3914f6f67f5b86d0c8f6c86
+      - 6878c7aa0dae7f8afa535d8b19ab64e1
       X-In-Time:
-      - '1752744015337174'
+      - '1752745898493860'
     body:
-      encoding: UTF-8
-      string: '{"message":"Signature mismatch","label":"INVALID_SIGNATURE"}'
-  recorded_at: Thu, 17 Jul 2025 09:20:15 GMT
+      encoding: ASCII-8BIT
+      string: '{"label":"FORBIDDEN","message":"Request API key does not have wallet permission"}'
+  recorded_at: Thu, 17 Jul 2025 09:51:38 GMT
 recorded_with: VCR 6.3.1

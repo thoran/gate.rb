@@ -1,0 +1,63 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.gateio.ws/api/v4/wallet/total_balance?currency=BTC
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - application/json
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - application/json
+      Key:
+      - "<API_KEY>"
+      Sign:
+      - d715e8fdad90ef662be130cdfd370617dc0c2c3323a81355465176add8f31a68f7828602d48ba04c092751c02e80856ab3d8a9a1f72b337e5d30476eac4a4ad1
+      Timestamp:
+      - '1752749242'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 17 Jul 2025 10:47:24 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Server:
+      - openresty
+      X-Gate-Ratelimit-Requests-Remain:
+      - '79'
+      X-Gate-Ratelimit-Limit:
+      - '80'
+      X-Gate-Ratelimit-Reset-Timestamp:
+      - '1752749244'
+      X-Out-Time:
+      - '1752749244712995'
+      X-Gate-Trace-Id:
+      - 6878d4bce55e473ddbb801425d493f98
+      X-In-Time:
+      - '1752749244661353'
+      Access-Control-Allow-Methods:
+      - GET,POST,OPTIONS,DELETE,PUT
+      Access-Control-Allow-Headers:
+      - DNT,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type
+      Access-Control-Max-Age:
+      - '1728000'
+      Vary:
+      - Origin
+    body:
+      encoding: ASCII-8BIT
+      string: '{"details":{"delivery":{"currency":"BTC","amount":"0","unrealised_pnl":"0"},"finance":{"currency":"BTC","amount":"0"},"futures":{"currency":"BTC","amount":"0","unrealised_pnl":"0"},"margin":{"currency":"BTC","amount":"0","borrowed":"0"},"meme_box":{"currency":"BTC","amount":"0"},"options":{"currency":"BTC","amount":"0","unrealised_pnl":"0"},"payment":{"currency":"BTC","amount":"0"},"pilot":{"currency":"BTC","amount":"0"},"quant":{"currency":"BTC","amount":"0"},"spot":{"currency":"BTC","amount":"1.364103930553768984542779"}},"total":{"amount":"1.364103930553768984542779","borrowed":"0","currency":"BTC","unrealised_pnl":"0"}}'
+  recorded_at: Thu, 17 Jul 2025 10:47:24 GMT
+recorded_with: VCR 6.3.1

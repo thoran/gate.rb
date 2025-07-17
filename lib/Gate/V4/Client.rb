@@ -120,6 +120,13 @@ module Gate
         handle_response(response)
       end
 
+      # Private endpoints
+
+      def wallet_total_balance(currency: nil)
+        response = get(path: '/wallet/total_balance', args: {currency: currency})
+        handle_response(response)
+      end
+
       def spot_orders(
         text: nil,
         currency_pair:,
@@ -149,20 +156,63 @@ module Gate
         handle_response(response)
       end
 
+      def spot_my_trades(
+        currency_pair: nil,
+        limit: nil,
+        page: nil,
+        order_id: nil,
+        account: nil,
+        from: nil,
+        to: nil
+      )
+        args = {
+          currency_pair: currency_pair,
+          limit: limit,
+          page: page,
+          order_id: order_id,
+          account: account,
+          from: from,
+          to: to
+        }.reject{|k,v| v.nil?}.stringify_values
+        response = get(
+          path: '/spot/my_trades',
+          args: args
+        )
+        handle_response(response)
+      end
+
       private
 
-      def initialize(api_key:, api_secret:)
-        @api_key = api_key.encode('UTF-8')
-        @api_secret = api_secret.encode('UTF-8')
+      def initialize(api_key: nil, api_secret: nil, configuration: nil)
+        @api_key = (api_key || configuration&.api_key || Gate.configuration.api_key).encode('UTF-8')
+        @api_secret = (api_secret || configuration&.api_secret || Gate.configuration.api_secret).encode('UTF-8')
       end
 
       def full_path(path)
         self.class.path_prefix + path
       end
 
-      def encoded_payload(args)
-        args.reject!{|k,v| v.nil?}
-        OpenSSL::Digest::SHA512.hexdigest(JSON.dump(args))
+      def query_string(verb:, args:)
+        case verb
+        when 'GET'
+          args.x_www_form_urlencode
+        when 'POST'
+          nil
+        else
+          raise "The verb, #{verb}, is not acceptable."
+        end
+      end
+
+      def encoded_payload(verb:, args:)
+        case verb
+        when 'GET'
+          OpenSSL::Digest::SHA512.hexdigest('')
+        when 'POST'
+          args.reject!{|k,v| v.nil?}
+          OpenSSL::Digest::SHA512.hexdigest(JSON.dump(args))
+        else
+          raise "The verb, #{verb}, is not acceptable."
+        end
       end
 
       def timestamp
@@ -170,17 +220,13 @@ module Gate
       end
 
       def message(verb:, path:, args:)
-        query_string = (
-          case verb
-          when 'GET'
-            args.x_www_form_urlencode
-          when 'POST'
-            nil
-          else
-            raise "The verb, #{verb}, is not acceptable."
-          end
-        )
-        [verb, full_path(path), query_string, encoded_payload(args), timestamp].join("\n")
+        [
+          verb,
+          full_path(path),
+          query_string(verb: verb, args: args),
+          encoded_payload(verb: verb, args: args),
+          timestamp
+        ].join("\n")
       end
 
       def signature(message)
@@ -230,6 +276,12 @@ module Gate
             )
           when 401
             raise Gate::AuthenticationError.new(
+              code: response.code,
+              message: response.message,
+              body: response.body
+            )
+          when 403
+            raise Gate::InsufficientPermissionError.new(
               code: response.code,
               message: response.message,
               body: response.body

@@ -27,4 +27,5 @@ module Gate
   class InvalidRequestError < Error; end
   class NetworkError < Error; end
   class RateLimitError < Error; end
+  class InsufficientPermissionError < Error; end
 end

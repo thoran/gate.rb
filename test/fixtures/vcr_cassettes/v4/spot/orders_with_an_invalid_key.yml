@@ -5,7 +5,7 @@ http_interactions:
     uri: https://api.gateio.ws/api/v4/spot/orders
     body:
       encoding: UTF-8
-      string: '{"currency_pair":"BTC_USDT","side":"buy","amount":"0.0001","price":"100000","time_in_force":"gtc"}'
+      string: '{"currency_pair":"ETH_USDT","side":"buy","amount":"0.0001","price":"100000","time_in_force":"gtc"}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
@@ -44,8 +44,54 @@ http_interactions:
       - '1752480549049412'
     body:
       encoding: UTF-8
-      string: '{"label":"INVALID_KEY","message":"Invalid key provided"}
+      string: '{"label":"INVALID_KEY","message":"Invalid key provided"}'
+  recorded_at: Mon, 14 Jul 2025 08:09:08 GMT
+- request:
+    method: post
+    uri: https://api.gateio.ws/api/v4/spot/orders
+    body:
+      encoding: UTF-8
+      string: '{"currency_pair":"BTC_USDT","side":"buy","amount":"0.0001","price":"100000","time_in_force":"gtc"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - application/json
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - application/json
+      Key:
+      - invalid_key
+      Sign:
+      - cdf741c07ae70e5e86dfb02f1918f7399cfbdbded332a0cbcf401ae52518bff80bacb7cead1629cc7fcc0a6f85938574eb80e8bc6f5e78a3d2edb85ef59234b8
+      Timestamp:
+      - '1752752773'
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Date:
+      - Thu, 17 Jul 2025 11:46:15 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Server:
+      - openresty
+      X-Out-Time:
+      - '1752752775681326'
+      X-Gate-Trace-Id:
+      - 6878e28722f9f8fa21342fc5e71a8d29
+      X-In-Time:
+      - '1752752775676293'
+    body:
+      encoding: UTF-8
+      string: '{"message":"Invalid key provided","label":"INVALID_KEY"}
 
         '
-  recorded_at: Mon, 14 Jul 2025 08:09:08 GMT
+  recorded_at: Thu, 17 Jul 2025 11:46:15 GMT
 recorded_with: VCR 6.3.1

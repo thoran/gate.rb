@@ -6,4 +6,5 @@ $LOAD_PATH.unshift(lib_dir) unless $LOAD_PATH.include?(lib_dir)
 module Gate; end
 
 require 'Gate/Client'
+require 'Gate/Configuration'
 require 'Gate/VERSION'

@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://api.gateio.ws/api/v4/spot/my_trades?currency_pair=BTC_USDT&limit=10
+    uri: https://api.gateio.ws/api/v4/wallet/total_balance?currency=BTC
     body:
       encoding: US-ASCII
       string: ''
@@ -16,18 +16,18 @@ http_interactions:
       Content-Type:
       - application/json
       Key:
-      - "<API_KEY>"
+      - invalid_key
       Sign:
-      - 5885e5ab2fab9589fee95821017c19487acb8a2fceadc0ba3cf901b938e415ebd5c0abb570643b1ddfda42a81e32636ded51e0f1dec0eb994b86c7131702c874
+      - '04228ea7e473b475a7221cff0400edf565a60092f02bb7b90e8a784499a5e36a6182e79ec43cdbd559439764eb6f1b43dedb23dbb6a1b25a2b821818a2b2d25c'
       Timestamp:
-      - '1752480709'
+      - '1752751172'
   response:
     status:
       code: 401
       message: Unauthorized
     headers:
       Date:
-      - Mon, 14 Jul 2025 08:11:51 GMT
+      - Thu, 17 Jul 2025 11:19:34 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
@@ -37,15 +37,13 @@ http_interactions:
       Server:
       - openresty
       X-Out-Time:
-      - '1752480711684346'
+      - '1752751174809547'
       X-Gate-Trace-Id:
-      - 6874bbc7eb9e61655b1732ad7f874d38
+      - 6878dc46f0a68d4f5ffe28993e1ec26f
       X-In-Time:
-      - '1752480711679594'
+      - '1752751174805322'
     body:
       encoding: UTF-8
-      string: '{"label":"INVALID_SIGNATURE","message":"Signature mismatch"}
-
-        '
-  recorded_at: Mon, 14 Jul 2025 08:11:51 GMT
+      string: '{"message":"Invalid key provided","label":"INVALID_KEY"}'
+  recorded_at: Thu, 17 Jul 2025 11:19:35 GMT
 recorded_with: VCR 6.3.1

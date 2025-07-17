@@ -18,16 +18,16 @@ http_interactions:
       Key:
       - "<API_KEY>"
       Sign:
-      - 1c0dc24fb29e468c7a98880d6fa76d8f5491e14af43d9eca3a51301422735885c10d59cb6221d57c9302f3d703b43db83cc06af05c525cb67580337476e2c0af
+      - cc6628c2bd120f8f752f707d4e869d7aad98f7e7dfd4d0bc37f4da98f7d5873445e5c5d352983488824a942738539dd605c99ac78f2f83910998f172f0217875
       Timestamp:
-      - '1752751797'
+      - '1752743502'
   response:
     status:
       code: 201
       message: Created
     headers:
       Date:
-      - Thu, 17 Jul 2025 11:29:59 GMT
+      - Thu, 17 Jul 2025 09:11:44 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -43,13 +43,13 @@ http_interactions:
       X-Gate-Ratelimit-Limit:
       - '30'
       X-Gate-Ratelimit-Reset-Timestamp:
-      - '1752751799'
+      - '1752743504'
       X-Out-Time:
-      - '1752751799046075'
+      - '1752743504845799'
       X-Gate-Trace-Id:
-      - 6878deb79826b9aaf1a4ac820242f8c3
+      - 6878be504a0b102de77a65e0fa47c85a
       X-In-Time:
-      - '1752751799026240'
+      - '1752743504818779'
       Access-Control-Allow-Methods:
       - GET,POST,OPTIONS,DELETE,PUT
       Access-Control-Allow-Headers:
@@ -60,6 +60,6 @@ http_interactions:
       - Origin
     body:
       encoding: UTF-8
-      string: '{"id":"877097334935","text":"apiv4","amend_text":"-","create_time":"1752751799","update_time":"1752751799","create_time_ms":1752751799044,"update_time_ms":1752751799044,"status":"open","currency_pair":"BTC_USDT","type":"limit","account":"spot","side":"buy","amount":"0.0001","price":"100000","time_in_force":"gtc","iceberg":"0","left":"0.0001","filled_amount":"0","fill_price":"0","filled_total":"0","fee":"0","fee_currency":"BTC","point_fee":"0","gt_fee":"0","gt_maker_fee":"0","gt_taker_fee":"0","gt_discount":false,"rebated_fee":"0","rebated_fee_currency":"USDT","finish_as":"open"}'
-  recorded_at: Thu, 17 Jul 2025 11:29:59 GMT
+      string: '{"id":"877021448466","text":"apiv4","amend_text":"-","create_time":"1752743504","update_time":"1752743504","create_time_ms":1752743504844,"update_time_ms":1752743504844,"status":"open","currency_pair":"BTC_USDT","type":"limit","account":"spot","side":"buy","amount":"0.0001","price":"100000","time_in_force":"gtc","iceberg":"0","left":"0.0001","filled_amount":"0","fill_price":"0","filled_total":"0","fee":"0","fee_currency":"BTC","point_fee":"0","gt_fee":"0","gt_maker_fee":"0","gt_taker_fee":"0","gt_discount":false,"rebated_fee":"0","rebated_fee_currency":"USDT","finish_as":"open"}'
+  recorded_at: Thu, 17 Jul 2025 09:11:45 GMT
 recorded_with: VCR 6.3.1
